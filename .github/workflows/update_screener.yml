@@ -1,0 +1,14 @@
+name: Update Screener Daily
+
+on:
+  schedule:
+    - cron: '0 9 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call update endpoint
+        run: |
+          curl "smart-value-screener-production.up.railway.app"

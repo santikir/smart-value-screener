@@ -84,6 +84,8 @@ def run_full_update():
                 "rec_color":      data["rec_color"],
                 "sentiment":      data["sentiment"],
             })
+            import time
+            time.sleep(1.5)  # esperar 1.5 segundos entre empresas
         except Exception as e:
             print(f"❌ {e}")
             errors.append(sym)

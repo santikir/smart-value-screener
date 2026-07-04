@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Call update endpoint
         run: |
-          curl "https://smart-value-screener-production.up.railway.app"
+          curl "https://smart-value-screener-production.up.railway.app/api/update-screener?secret=smartvalue2026"

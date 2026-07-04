@@ -7,7 +7,8 @@ Uso local:    python3 update_screener.py
 En Railway:   se llama automáticamente vía /api/update-screener
 """
 
-import os, json
+import os, json, time
+import yfinance as yf
 from datetime import datetime
 
 
@@ -65,6 +66,11 @@ def run_full_update():
     results, errors = [], []
 
     for i, sym in enumerate(UNIVERSE, 1):
+        # Delay progresivo para evitar rate limit
+        if i % 10 == 0:
+            time.sleep(30)  # pausa larga cada 10 empresas
+        else:
+            time.sleep(3)
         try:
             print(f"  [{i:3d}/{len(UNIVERSE)}] {sym:<14}", end="", flush=True)
             data = analyze_ticker(sym)

@@ -7,7 +7,8 @@ Uso local:    python3 update_screener.py
 En Railway:   se llama automáticamente vía /api/update-screener
 """
 
-import os, json, time
+import os, json
+import time
 import yfinance as yf
 from datetime import datetime
 
@@ -57,6 +58,7 @@ def write_to_sheets(top5, sheets_id):
 
 def run_full_update():
     from app import UNIVERSE, SHEETS_ID, analyze_ticker, sanitize_nan
+    import time
 
     print("=" * 60)
     print(f"  SMART VALUE SCREENER — {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")

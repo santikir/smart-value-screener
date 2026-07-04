@@ -543,12 +543,14 @@ def api_analyze(symbol):
 
 @app.route("/api/update-screener", methods=["GET","POST"])
 def api_update_screener():
-    """Endpoint para el cron job de Railway."""
     if request.args.get("secret","") != CRON_SECRET:
         return jsonify({"success":False, "error":"unauthorized"}), 401
     try:
+        import threading
         from update_screener import run_full_update
-        return jsonify({"success":True, "result": run_full_update()})
+        thread = threading.Thread(target=run_full_update, daemon=True)
+        thread.start()
+        return jsonify({"success":True, "message":"Screener iniciado en background"})
     except Exception as e:
         return jsonify({"success":False, "error":str(e)}), 500
 
